@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import { install as installSourceMapSupport } from 'source-map-support';
 
+import Reception from './Reception'
+
 // TODO: Implement CLI.
 export async function main(argv: string[]): Promise<void> {
-  console.log('Hello, world!', argv);
+  console.log('Baratie still in construction...\n', argv)
 }
 
 //
