@@ -1,9 +1,71 @@
 {
   "name": "ts-baratie",
+  "description": "<p align=\"center\">   <img alt=\"\" src=\"./baratie.logo.png\"\"> </p>",
   "version": "1.0.0",
+  "license": "ISC",
+  "author": "Gabriel RdeC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poussemiche/ts-baratie.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Poussemiche/ts-baratie/issues"
+  },
+  "homepage": "https://github.com/Poussemiche/ts-baratie#readme",
   "main": "index.js",
-  "license": "MIT",
+  "bin": "lib/index.js",
+  "files": [
+    "README.md",
+    "css/",
+    "dist/",
+    "lib-commonjs/",
+    "lib/",
+    "scss/"
+  ],
+  "scripts": {
+    "test": "run-script eslint && run-script tsc --noEmit && run-script jest",
+    "start": "node lib/index.js",
+    "clean": "del-cli lib lib-commonjs dist css coverage && jest --clearCache",
+    "build": "run-script clean && run-script build:js && run-script build:d.ts && run-script build:cleanup",
+    "build:cleanup": "del-cli \"lib?(-*)/**/@(__demo__|__snapshots__|?(*.)test.@(ts|tsx|js|jsx))\"",
+    "build:d.ts": "run-script tsc --emitDeclarationOnly",
+    "build:js": "cross-env NODE_ENV=production babel src --out-dir lib --extensions .ts,.tsx,.js,.jsx --copy-files --source-maps",
+    "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --ignore-pattern \"/__demo__/\" --no-error-on-unmatched-pattern",
+    "jest": "cross-env NODE_ENV=test jest --passWithNoTests",
+    "prepack": "run-script build",
+    "prestart": "run-script build:js",
+    "reformat": "run-script eslint --fix --quiet",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@types/source-map-support": "^0.5.1",
+    "source-map-support": "^0.5.16"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/generator": "^7.9.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/plugin-transform-typescript": "^7.9.4",
+    "@babel/preset-env": "^7.9.0",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.8",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "@xornot/run-script": "^0.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^25.2.4",
+    "babel-plugin-const-enum": "^0.0.5",
+    "cross-env": "^7.0.2",
+    "del-cli": "^3.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "jest": "^25.2.4",
+    "prettier": "^2.0.2",
     "typescript": "^3.8.3"
   }
 }
